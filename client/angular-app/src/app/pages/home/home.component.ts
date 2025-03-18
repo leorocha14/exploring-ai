@@ -8,31 +8,34 @@ import { RouterModule } from '@angular/router';
   imports: [CommonModule, RouterModule],
   template: `
     <!-- Hero Section -->
-    <section class="relative h-[600px] bg-cover bg-center" style="background-image: url('assets/images/barbershop-hero.jpg');">
-      <div class="absolute inset-0 bg-black bg-opacity-50"></div>
+    <div class="relative h-[600px]">
+      <div 
+        class="absolute inset-0 bg-cover bg-center bg-no-repeat"
+        [ngStyle]="{'backgroundImage': 'url(assets/images/barbershop-hero.jpg)', 'filter': 'brightness(0.5)'}"
+      ></div>
       <div class="relative container mx-auto px-4 h-full flex items-center">
         <div class="text-white max-w-2xl">
           <h1 class="text-5xl font-bold mb-4">Barbearia Style</h1>
           <p class="text-xl mb-8">Transforme seu visual com nossos serviços profissionais de barbearia</p>
-          <a routerLink="/agendamento" class="bg-yellow-500 text-gray-900 px-8 py-3 rounded-lg font-bold hover:bg-yellow-600 transition-colors">
+          <a routerLink="/agendamento" class="bg-yellow-500 text-gray-900 px-8 py-3 rounded-lg font-bold hover:bg-yellow-600 transition-colors inline-block">
             Agende Agora
           </a>
         </div>
       </div>
-    </section>
+    </div>
 
     <!-- Services Preview -->
     <section class="py-16 bg-white">
       <div class="container mx-auto px-4">
         <h2 class="text-3xl font-bold text-center mb-12">Nossos Serviços</h2>
         <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-          <div class="text-center">
-            <div class="bg-gray-100 rounded-lg p-6 mb-4">
+          <a routerLink="/corte-cabelo" class="text-center cursor-pointer group">
+            <div class="bg-gray-100 rounded-lg p-6 mb-4 transform transition-transform group-hover:scale-105">
               <i class="fas fa-cut text-4xl text-yellow-500"></i>
             </div>
             <h3 class="text-xl font-bold mb-2">Corte de Cabelo</h3>
             <p class="text-gray-600">Cortes modernos e clássicos para todos os estilos</p>
-          </div>
+          </a>
           <div class="text-center">
             <div class="bg-gray-100 rounded-lg p-6 mb-4">
               <i class="fas fa-beard text-4xl text-yellow-500"></i>

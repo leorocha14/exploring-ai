@@ -1,6 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { AgendamentoService } from '../../services/agendamento.service';
 
 @Component({
   selector: 'app-agendamento',
@@ -26,10 +27,12 @@ import { FormsModule } from '@angular/forms';
                 required
               >
                 <option value="">Selecione um serviço</option>
-                <option value="corte">Corte de Cabelo - R$ 50,00</option>
-                <option value="barba">Barba - R$ 35,00</option>
-                <option value="combo">Combo (Corte + Barba) - R$ 75,00</option>
-                <option value="tratamento">Tratamento Capilar - R$ 80,00</option>
+                <option value="Corte Masculino Tradicional">Corte Masculino Tradicional - R$ 45,00</option>
+                <option value="Corte Degradê">Corte Degradê - R$ 55,00</option>
+                <option value="Corte Premium">Corte Premium - R$ 75,00</option>
+                <option value="Corte Feminino">Corte Feminino - R$ 65,00</option>
+                <option value="Barba">Barba - R$ 35,00</option>
+                <option value="Tratamentos">Tratamentos - A partir de R$ 50,00</option>
               </select>
             </div>
 
@@ -135,7 +138,7 @@ import { FormsModule } from '@angular/forms';
   `,
   styles: []
 })
-export class AgendamentoComponent {
+export class AgendamentoComponent implements OnInit {
   formData = {
     servico: '',
     profissional: '',
@@ -144,6 +147,16 @@ export class AgendamentoComponent {
     nome: '',
     telefone: ''
   };
+
+  constructor(private agendamentoService: AgendamentoService) {}
+
+  ngOnInit() {
+    this.agendamentoService.getServicoSelecionado().subscribe(servico => {
+      if (servico) {
+        this.formData.servico = servico;
+      }
+    });
+  }
 
   onSubmit() {
     console.log('Dados do agendamento:', this.formData);

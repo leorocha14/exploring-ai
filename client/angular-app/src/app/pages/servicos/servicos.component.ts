@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { RouterModule } from '@angular/router';
+import { RouterModule, Router } from '@angular/router';
 
 @Component({
   selector: 'app-servicos',
@@ -12,31 +12,27 @@ import { RouterModule } from '@angular/router';
         <h1 class="text-4xl font-bold text-center mb-12">Nossos Serviços</h1>
 
         <!-- Serviços Grid -->
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 p-8">
           <!-- Corte de Cabelo -->
-          <div class="bg-white rounded-lg shadow-lg overflow-hidden">
-            <img src="assets/images/corte.jpg" alt="Corte de Cabelo" class="w-full h-64 object-cover">
-            <div class="p-6">
-              <h3 class="text-2xl font-bold mb-2">Corte de Cabelo</h3>
-              <p class="text-gray-600 mb-4">
-                Cortes modernos e clássicos realizados por profissionais experientes.
-                Inclui lavagem e finalização.
-              </p>
-              <div class="flex justify-between items-center">
-                <span class="text-2xl font-bold text-yellow-500">R$ 50,00</span>
-                <a 
-                  routerLink="/agendamento" 
-                  class="bg-yellow-500 text-gray-900 px-6 py-2 rounded-lg font-bold hover:bg-yellow-600 transition-colors"
-                >
-                  Agendar
-                </a>
+          <a href="/corte-cabelo" class="block group">
+            <div class="relative h-64 rounded-lg overflow-hidden shadow-lg group-hover:scale-105 transition-transform duration-300">
+              <div 
+                class="absolute inset-0 bg-cover bg-center bg-no-repeat"
+                [ngStyle]="{'backgroundImage': 'url(assets/images/corte.jpg)', 'filter': 'brightness(0.7)'}"
+              ></div>
+              <div class="relative h-full flex flex-col justify-end p-6 text-white">
+                <h3 class="text-xl font-bold mb-2">Corte de Cabelo</h3>
+                <p class="text-sm">Cortes modernos e clássicos para todos os estilos</p>
+                <p class="text-lg font-bold mt-2">A partir de R$ 45,00</p>
               </div>
             </div>
-          </div>
+          </a>
 
           <!-- Barba -->
           <div class="bg-white rounded-lg shadow-lg overflow-hidden">
-            <img src="assets/images/barba.jpg" alt="Barba" class="w-full h-64 object-cover">
+            <div class="w-full h-64 bg-gray-200 flex items-center justify-center">
+              <i class="fas fa-beard text-6xl text-gray-400"></i>
+            </div>
             <div class="p-6">
               <h3 class="text-2xl font-bold mb-2">Barba</h3>
               <p class="text-gray-600 mb-4">
@@ -57,7 +53,9 @@ import { RouterModule } from '@angular/router';
 
           <!-- Combo -->
           <div class="bg-white rounded-lg shadow-lg overflow-hidden">
-            <img src="assets/images/combo.jpg" alt="Combo" class="w-full h-64 object-cover">
+            <div class="w-full h-64 bg-gray-200 flex items-center justify-center">
+              <i class="fas fa-cut text-6xl text-gray-400"></i>
+            </div>
             <div class="p-6">
               <h3 class="text-2xl font-bold mb-2">Combo (Corte + Barba)</h3>
               <p class="text-gray-600 mb-4">
@@ -78,7 +76,9 @@ import { RouterModule } from '@angular/router';
 
           <!-- Tratamento Capilar -->
           <div class="bg-white rounded-lg shadow-lg overflow-hidden">
-            <img src="assets/images/tratamento.jpg" alt="Tratamento" class="w-full h-64 object-cover">
+            <div class="w-full h-64 bg-gray-200 flex items-center justify-center">
+              <i class="fas fa-spa text-6xl text-gray-400"></i>
+            </div>
             <div class="p-6">
               <h3 class="text-2xl font-bold mb-2">Tratamento Capilar</h3>
               <p class="text-gray-600 mb-4">
@@ -135,4 +135,15 @@ import { RouterModule } from '@angular/router';
   `,
   styles: []
 })
-export class ServicosComponent {} 
+export class ServicosComponent {
+  constructor(private router: Router) {}
+
+  navegarParaCorteCabelo() {
+    console.log('Navegando para página de corte de cabelo...');
+    this.router.navigateByUrl('/corte-cabelo').then(() => {
+      console.log('Navegação concluída');
+    }).catch(error => {
+      console.error('Erro na navegação:', error);
+    });
+  }
+} 
